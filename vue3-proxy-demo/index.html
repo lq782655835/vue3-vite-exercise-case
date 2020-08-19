@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue3-demo</title>
+</head>
+<body>
+    <div id="app"></div>
+    <button id="btn">点击</button>
+    <script src="./proxy-demo.js"></script>
+
+    <script>
+        const app = document.getElementById('app');
+        const btn = document.getElementById('btn');
+        const o = {
+            name: 'zhangsan',
+            age: 18,
+            obj1: {
+                name: 'chen'
+            },
+            obj2: {
+                name: 'chen'
+            }
+        };
+        let obj = reactive(o);
+        let next =  computed(() => obj.age + 1);
+        effect(() => {
+            app.innerHTML = `${obj.name}今年${obj.age}岁，明年${next.value}岁`;
+        })
+
+        btn.addEventListener('click', function() {
+            obj.age++;
+        })
+    </script>
+</body>
+</html>
